@@ -63,6 +63,14 @@
             <phone:PivotItem>
                 <item:Card x:Name="card5"/>
             </phone:PivotItem>
+
+            <phone:PivotItem>
+                <item:Card x:Name="card6"/>
+            </phone:PivotItem>
+
+            <phone:PivotItem>
+                <item:Card x:Name="card7"/>
+            </phone:PivotItem>
         </phone:Pivot>
         
         <!--Uncomment to see an alignment grid to help ensure your controls are

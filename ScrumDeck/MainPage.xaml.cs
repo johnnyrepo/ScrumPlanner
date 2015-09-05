@@ -58,21 +58,25 @@ namespace ScrumDeck
          * */
         private void SetTShirtScale()
         {
-            card1.text.Text = "XS";
-            card2.text.Text = "S";
-            card3.text.Text = "M";
-            card4.text.Text = "L";
-            card5.text.Text = "XL";
+            card1.text.Text = "2S";
+            card2.text.Text = "XS";
+            card3.text.Text = "S";
+            card4.text.Text = "M";
+            card5.text.Text = "L";
+            card6.text.Text = "XL";
+            card7.text.Text = "2L";
         }
 
 
         private void SetFibonacciScale()
         {
             card1.text.Text = "1";
-            card2.text.Text = "3";
-            card3.text.Text = "5";
-            card4.text.Text = "8";
-            card5.text.Text = "13";
+            card2.text.Text = "2";
+            card3.text.Text = "3";
+            card4.text.Text = "5";
+            card5.text.Text = "8";
+            card6.text.Text = "13";
+            card6.text.Text = "21";
         }
 
         // Sample code for building a localized ApplicationBar
