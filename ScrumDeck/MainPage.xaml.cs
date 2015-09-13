@@ -76,7 +76,7 @@ namespace ScrumDeck
             card4.text.Text = "5";
             card5.text.Text = "8";
             card6.text.Text = "13";
-            card6.text.Text = "21";
+            card7.text.Text = "21";
         }
 
         // Sample code for building a localized ApplicationBar

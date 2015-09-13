@@ -10,7 +10,40 @@
     d:DesignHeight="650" d:DesignWidth="480">
 
     <Grid x:Name="grid" 
-        Grid.Row="1" Margin="12,0,12,12" Height="650">
+        Grid.Row="1" Margin="12,0,12,12" Height="650" RenderTransformOrigin="0.5,0.5" MouseLeftButtonUp="StartFlipAnimation">
+        <Grid.Resources>
+            <Storyboard x:Name="backFlip1" Completed="On_backFlip1_Completed">
+                <DoubleAnimation
+                    Storyboard.TargetName="gridProjection"
+                    Storyboard.TargetProperty="RotationY"
+                    From="0.0" To="90.0" Duration="0:0:0.15"
+                    AutoReverse="False"/>
+            </Storyboard>
+            <Storyboard x:Name="backFlip2" Completed="On_backFlip2_Completed">
+                <DoubleAnimation
+                    Storyboard.TargetName="gridProjection"
+                    Storyboard.TargetProperty="RotationY"
+                    From="90.0" To="180.0" Duration="0:0:0.15"
+                    AutoReverse="False"/>
+            </Storyboard>
+            <Storyboard x:Name="frontFlip1" Completed="On_frontFlip1_Completed">
+                <DoubleAnimation
+                    Storyboard.TargetName="gridProjection"
+                    Storyboard.TargetProperty="RotationY"
+                    From="180.0" To="90.0" Duration="0:0:0.15"
+                    AutoReverse="False"/>
+            </Storyboard>
+            <Storyboard x:Name="frontFlip2" Completed="On_frontFlip2_Completed">
+                <DoubleAnimation
+                    Storyboard.TargetName="gridProjection"
+                    Storyboard.TargetProperty="RotationY"
+                    From="90.0" To="0.0" Duration="0:0:0.15"
+                    AutoReverse="False"/>       
+            </Storyboard>
+        </Grid.Resources>
+        <Grid.Projection>
+            <PlaneProjection x:Name="gridProjection" RotationY="0"/>
+        </Grid.Projection>
         <Border BorderThickness="2" Grid.Row="0" Grid.ColumnSpan="2" 
                 CornerRadius="51,51,51,51" BorderBrush="Blue">
             <Rectangle Fill="DarkOrange" RadiusX="50" RadiusY="50">
@@ -18,6 +51,13 @@
         </Border>
         <TextBlock x:Name="text" 
                    Text="XS" Foreground="White" FontSize="400" 
-                   TextAlignment="Center" Margin="0,0,0,0"/>
+                   TextAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.Projection>
+                <PlaneProjection CenterOfRotationX="0"/>
+            </TextBlock.Projection>
+            <TextBlock.RenderTransform>
+                <CompositeTransform/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </UserControl>

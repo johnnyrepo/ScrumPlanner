@@ -12,9 +12,54 @@ namespace ScrumDeck.Item
 {
     public partial class Card : UserControl
     {
+
+        private bool IsCardBackShown = false;
+
         public Card()
         {
             InitializeComponent();
+        }
+
+        private void StartFlipAnimation(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (IsCardBackShown)
+            {
+                IsEnabled = false;
+                frontFlip1.Begin();
+            }
+            else
+            {
+                IsEnabled = false;
+                backFlip1.Begin();
+            }
+        }
+
+        private void On_backFlip1_Completed(object sender, EventArgs e)
+        {
+            // change it to something more safe
+            // this.text.Opacity = 0.0;
+            text.Visibility = Visibility.Collapsed;
+            backFlip2.Begin();
+        }
+
+        private void On_backFlip2_Completed(object sender, EventArgs e)
+        {
+            IsEnabled = true;
+            IsCardBackShown = true;
+        }
+
+        private void On_frontFlip1_Completed(object sender, EventArgs e)
+        {
+            // change it to something more safe
+            // this.text.Opacity = 1.0;
+            text.Visibility = Visibility.Visible;
+            frontFlip2.Begin();
+        }
+
+        private void On_frontFlip2_Completed(object sender, EventArgs e)
+        {
+            IsEnabled = true;
+            IsCardBackShown = false;
         }
     }
 }
