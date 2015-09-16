@@ -10,7 +10,7 @@
     d:DesignHeight="650" d:DesignWidth="480">
 
     <Grid x:Name="grid" 
-        Grid.Row="1" Margin="12,0,12,12" Height="650" RenderTransformOrigin="0.5,0.5" MouseLeftButtonUp="StartFlipAnimation">
+        Grid.Row="1" Margin="0,0,0,0" Height="650" RenderTransformOrigin="0.5,0.5" MouseLeftButtonUp="StartFlipAnimation">
         <Grid.Resources>
             <Storyboard x:Name="backFlip1" Completed="On_backFlip1_Completed">
                 <DoubleAnimation
@@ -51,7 +51,7 @@
         </Border>
         <TextBlock x:Name="text" 
                    Text="XS" Foreground="White" FontSize="400" 
-                   TextAlignment="Center" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                   TextAlignment="Center" VerticalAlignment="Stretch" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
             <TextBlock.Projection>
                 <PlaneProjection CenterOfRotationX="0"/>
             </TextBlock.Projection>

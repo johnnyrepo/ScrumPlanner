@@ -59,13 +59,16 @@ namespace ScrumDeck
          * */
         private void SetTShirtScale()
         {
-            card1.text.Text = "2S";
+            card1.text.Text = "XXS";
             card2.text.Text = "XS";
             card3.text.Text = "S";
             card4.text.Text = "M";
             card5.text.Text = "L";
             card6.text.Text = "XL";
-            card7.text.Text = "2L";
+            card7.text.Text = "XXL";
+
+            card1.text.FontSize /= 2;
+            card7.text.FontSize /= 2;
         }
 
 
@@ -78,6 +81,9 @@ namespace ScrumDeck
             card5.text.Text = "8";
             card6.text.Text = "13";
             card7.text.Text = "21";
+
+            card1.text.FontSize = card2.text.FontSize;
+            card7.text.FontSize = card2.text.FontSize;
         }
 
         private void ResetCards(object sender, SelectionChangedEventArgs e)
