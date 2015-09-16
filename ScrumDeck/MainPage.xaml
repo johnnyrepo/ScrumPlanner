@@ -43,7 +43,7 @@
         <!--StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="Grid Test" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
             <TextBlock Text="page 1" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
-        <phone:Pivot>
+        <phone:Pivot SelectionChanged="ResetCards">
             <phone:PivotItem>
                 <item:Card x:Name="card1"/>
             </phone:PivotItem>

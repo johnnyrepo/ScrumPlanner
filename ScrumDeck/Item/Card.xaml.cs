@@ -61,5 +61,13 @@ namespace ScrumDeck.Item
             IsEnabled = true;
             IsCardBackShown = false;
         }
+
+        internal void Reset()
+        {
+            IsEnabled = true;
+            IsCardBackShown = false;
+            text.Visibility = Visibility.Visible;
+            gridProjection.RotationY = 0;
+        }
     }
 }

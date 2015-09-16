@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ScrumDeck.Resources;
+using ScrumDeck.Item;
 
 namespace ScrumDeck
 {
@@ -77,6 +78,17 @@ namespace ScrumDeck
             card5.text.Text = "8";
             card6.text.Text = "13";
             card7.text.Text = "21";
+        }
+
+        private void ResetCards(object sender, SelectionChangedEventArgs e)
+        {
+            card1.Reset();
+            card2.Reset();
+            card3.Reset();
+            card4.Reset();
+            card5.Reset();
+            card6.Reset();
+            card7.Reset();
         }
 
         // Sample code for building a localized ApplicationBar
