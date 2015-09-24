@@ -26,9 +26,10 @@ namespace ScrumDeck.Item
         {
             double appWidth = Application.Current.Host.Content.ActualWidth;
             double appHeight = Application.Current.Host.Content.ActualHeight;
+            double scaleFactor = Application.Current.Host.Content.ScaleFactor / 100;
 
-            Width = Application.Current.Host.Content.ActualWidth;
-            Height = Application.Current.Host.Content.ActualHeight;
+            Width = Width * scaleFactor;
+            Height = Height * scaleFactor;
         }
 
         private void StartFlipAnimation(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -47,8 +48,6 @@ namespace ScrumDeck.Item
 
         private void On_backFlip1_Completed(object sender, EventArgs e)
         {
-            // change it to something more safe
-            // this.text.Opacity = 0.0;
             text.Visibility = Visibility.Collapsed;
             backFlip2.Begin();
         }
@@ -61,8 +60,6 @@ namespace ScrumDeck.Item
 
         private void On_frontFlip1_Completed(object sender, EventArgs e)
         {
-            // change it to something more safe
-            // this.text.Opacity = 1.0;
             text.Visibility = Visibility.Visible;
             frontFlip2.Begin();
         }
