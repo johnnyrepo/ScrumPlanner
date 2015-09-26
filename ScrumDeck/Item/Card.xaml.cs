@@ -18,18 +18,6 @@ namespace ScrumDeck.Item
         public Card()
         {
             InitializeComponent();
-
-            Init();
-        }
-
-        private void Init()
-        {
-            double appWidth = Application.Current.Host.Content.ActualWidth;
-            double appHeight = Application.Current.Host.Content.ActualHeight;
-            double scaleFactor = Application.Current.Host.Content.ScaleFactor / 100;
-
-            Width = Width * scaleFactor;
-            Height = Height * scaleFactor;
         }
 
         private void StartFlipAnimation(object sender, System.Windows.Input.MouseButtonEventArgs e)
