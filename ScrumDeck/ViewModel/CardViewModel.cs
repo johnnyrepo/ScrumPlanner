@@ -1,6 +1,7 @@
 ﻿using ScrumDeck.Item;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,35 @@ using System.Threading.Tasks;
 
 namespace ScrumDeck.ViewModel
 {
+
     class CardViewModel : INotifyPropertyChanged
     {
-        private Card[] cards;
+
+        private int selectedCardIndex;
+
+        private ObservableCollection<Card> cards = new ObservableCollection<Card>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public CardViewModel(Card[] cards)
         {
-            this.cards = cards;
+            this.selectedCardIndex = 0;
+
+            foreach (Card card in cards) {
+                this.cards.Add(card);
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool IsCardEnabled
+        {
+            get
+            {
+                return this.cards[selectedCardIndex].IsEnabled 
+                    && !this.cards[selectedCardIndex].IsCardBackShown;
+            }
+
+        }
 
         private void RaisePropertyChanged(string propertyName)
         {
@@ -28,11 +48,18 @@ namespace ScrumDeck.ViewModel
             }
         }
 
-        public void ResetCards()
+        private void ResetCards()
         {
             foreach (Card card in cards) {
                 card.Reset();
             }
+        }
+
+        public void SelectCard(int index)
+        {
+            this.selectedCardIndex = index;
+
+            ResetCards();
         }
 
         /*

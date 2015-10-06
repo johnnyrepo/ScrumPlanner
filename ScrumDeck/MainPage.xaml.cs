@@ -18,12 +18,16 @@ namespace ScrumDeck
 
         private bool IsFibonacci = false;
 
+        private const string FIBONACCI_LBL = "Fibonacci";
+
+        private const string T_SHIRT_SIZE_LBL = "T-Shirt size";
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-            DataContext = new CardViewModel(new Card[] { card1, card2, card3, card4, card5, card6, card7});
+            this.DataContext = new CardViewModel(new Card[] { card1, card2, card3, card4, card5, card6, card7});
 
             ((CardViewModel) DataContext).SetTShirtScale();
 
@@ -33,27 +37,28 @@ namespace ScrumDeck
 
         private void ChangeScaleBtn_Click(object sender, EventArgs e)
         {
-            if (IsFibonacci)
+            if (this.IsFibonacci)
             {
                 ((CardViewModel) DataContext).SetTShirtScale();
 
-                ((ApplicationBarIconButton) sender).Text = "Fibonacci";
+                ((ApplicationBarIconButton) sender).Text = FIBONACCI_LBL;
 
-                IsFibonacci = false;
+                this.IsFibonacci = false;
             }
             else
             {
                 ((CardViewModel) DataContext).SetFibonacciScale();
 
-                ((ApplicationBarIconButton)sender).Text = "T-Shirt size";
+                ((ApplicationBarIconButton)sender).Text = T_SHIRT_SIZE_LBL;
 
-                IsFibonacci = true;
+                this.IsFibonacci = true;
             }
         }
 
         private void OnCardSelection_changed(object sender, SelectionChangedEventArgs e)
         {
-            ((CardViewModel)DataContext).ResetCards();
+            ((CardViewModel)DataContext).SelectCard(((Pivot)sender).SelectedIndex);
+            
         }
 
         // Sample code for building a localized ApplicationBar
