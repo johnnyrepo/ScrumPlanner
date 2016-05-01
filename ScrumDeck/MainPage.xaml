@@ -80,7 +80,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="appBar" IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="changeScaleBtn" IconUri="/Assets/AppBar/check.png" Text="Fibonacci" Click="ChangeScaleBtn_Click" IsEnabled="{Binding IsCardEnabled}"/>
+            <shell:ApplicationBarIconButton x:Name="changeScaleBtn" IconUri="/Assets/AppBar/check.png" Text="Fibonacci" Click="ChangeScaleBtn_Click" IsEnabled="True"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

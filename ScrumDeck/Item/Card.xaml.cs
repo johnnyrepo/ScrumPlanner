@@ -14,7 +14,9 @@ namespace ScrumDeck.Item
     public partial class Card : UserControl, INotifyPropertyChanged
     {
 
-        public bool IsCardBackShown = false;
+        private bool _IsCardBackShown = false;
+
+        private bool _IsEnabled = true;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,6 +27,7 @@ namespace ScrumDeck.Item
         
         private void RaisePropertyChanged(string propertyName)
         {
+            System.Diagnostics.Debug.WriteLine(propertyName + " to be raised in Card");
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
             {
@@ -32,50 +35,83 @@ namespace ScrumDeck.Item
             }
         }
 
+        public bool IsCardBackShown
+        {
+            get
+            {
+                return this._IsCardBackShown;
+            }
+            set
+            {
+                if (this._IsCardBackShown != value)
+                {
+                    this._IsCardBackShown = value;
+                    this.RaisePropertyChanged("IsCardBackShown");
+                }
+            }
+        }
+
+        public new bool IsEnabled
+        {
+            get
+            {
+                return this._IsEnabled;
+            }
+
+            set
+            {
+                if (this._IsEnabled != value)
+                {
+                    this._IsEnabled = value;
+                    this.RaisePropertyChanged("IsEnabled");
+                }
+            }
+        }
+
         private void StartFlipAnimation(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (IsCardBackShown)
             {
-                this.IsEnabled = false;
+                IsEnabled = false;
                 frontFlip1.Begin();
             }
             else
             {
-                this.IsEnabled = false;
+                IsEnabled = false;
                 backFlip1.Begin();
             }
         }
 
         private void On_backFlip1_Completed(object sender, EventArgs e)
         {
-            this.text.Visibility = Visibility.Collapsed;
+            text.Visibility = Visibility.Collapsed;
             backFlip2.Begin();
         }
 
         private void On_backFlip2_Completed(object sender, EventArgs e)
         {
-            this.IsEnabled = true;
-            this.IsCardBackShown = true;
+            IsEnabled = true;
+            IsCardBackShown = true;
         }
 
         private void On_frontFlip1_Completed(object sender, EventArgs e)
         {
-            this.text.Visibility = Visibility.Visible;
+            text.Visibility = Visibility.Visible;
             frontFlip2.Begin();
         }
 
         private void On_frontFlip2_Completed(object sender, EventArgs e)
         {
-            this.IsEnabled = true;
-            this.IsCardBackShown = false;
+            IsEnabled = true;
+            IsCardBackShown = false;
         }
 
         internal void Reset()
         {
-            this.IsEnabled = true;
-            this.IsCardBackShown = false;
-            this.text.Visibility = Visibility.Visible;
-            this.gridProjection.RotationY = 0;
+            IsEnabled = true;
+            IsCardBackShown = false;
+            text.Visibility = Visibility.Visible;
+            gridProjection.RotationY = 0;
         }
     }
 }

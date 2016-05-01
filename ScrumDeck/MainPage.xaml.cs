@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using ScrumDeck.Resources;
 using ScrumDeck.Item;
 using ScrumDeck.ViewModel;
+using System.ComponentModel;
 
 namespace ScrumDeck
 {
@@ -26,13 +27,26 @@ namespace ScrumDeck
         public MainPage()
         {
             InitializeComponent();
-
-            this.DataContext = new CardViewModel(new Card[] { card1, card2, card3, card4, card5, card6, card7});
+            
+            this.DataContext = new CardViewModel(new Card[] { card1, card2, card3, card4, card5, card6, card7 });
 
             ((CardViewModel) DataContext).SetTShirtScale();
 
+            ((CardViewModel) DataContext).PropertyChanged += new PropertyChangedEventHandler(CardViewModelPropertyChanged);
+
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void CardViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Got CardViewModelPropertyChanged event: " + sender + " " + e.PropertyName + " " + ((CardViewModel)DataContext).IsCardEnabled);
+            ApplicationBarIconButton btn = (ApplicationBarIconButton) this.ApplicationBar.Buttons[0];
+            System.Diagnostics.Debug.WriteLine("Acting with " + btn.Text);
+            if (e.PropertyName.Equals("IsCardEnabled") && btn != null)
+            {
+                btn.IsEnabled = ((CardViewModel) DataContext).IsCardEnabled;
+            }
         }
 
         private void ChangeScaleBtn_Click(object sender, EventArgs e)
@@ -49,7 +63,7 @@ namespace ScrumDeck
             {
                 ((CardViewModel) DataContext).SetFibonacciScale();
 
-                ((ApplicationBarIconButton)sender).Text = T_SHIRT_SIZE_LBL;
+                ((ApplicationBarIconButton) sender).Text = T_SHIRT_SIZE_LBL;
 
                 this.IsFibonacci = true;
             }
@@ -57,7 +71,7 @@ namespace ScrumDeck
 
         private void OnCardSelection_changed(object sender, SelectionChangedEventArgs e)
         {
-            ((CardViewModel)DataContext).SelectCard(((Pivot)sender).SelectedIndex);
+            ((CardViewModel) DataContext).SelectCard(((Pivot) sender).SelectedIndex);
             
         }
 

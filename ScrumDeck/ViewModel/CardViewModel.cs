@@ -15,32 +15,34 @@ namespace ScrumDeck.ViewModel
 
         private int selectedCardIndex;
 
-        private ObservableCollection<Card> cards = new ObservableCollection<Card>();
+        private Card[] cards;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public CardViewModel(Card[] cards)
         {
+            System.Diagnostics.Debug.WriteLine("CardViewModel init");
             this.selectedCardIndex = 0;
 
-            foreach (Card card in cards) {
-                this.cards.Add(card);
+            this.cards = cards;
+
+            foreach (Card card in this.cards) {
+                card.PropertyChanged += new PropertyChangedEventHandler(CardPropertyChanged);
             }
         }
 
-
-        public bool IsCardEnabled
+        private void CardPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            get
+            System.Diagnostics.Debug.WriteLine("CardViewModel got " + e.PropertyName);
+            if (e.PropertyName.Equals("IsEnabled"))
             {
-                return this.cards[selectedCardIndex].IsEnabled 
-                    && !this.cards[selectedCardIndex].IsCardBackShown;
+                this.RaisePropertyChanged("IsCardEnabled");
             }
-
         }
 
         private void RaisePropertyChanged(string propertyName)
         {
+            System.Diagnostics.Debug.WriteLine(propertyName + " to be raised in CardViewModel");
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
             {
@@ -55,10 +57,18 @@ namespace ScrumDeck.ViewModel
             }
         }
 
+        public bool IsCardEnabled
+        {
+            get
+            {
+                return this.cards[selectedCardIndex].IsEnabled;
+            }
+        }
+
         public void SelectCard(int index)
         {
             this.selectedCardIndex = index;
-
+            System.Diagnostics.Debug.WriteLine("Card " + index + " selected");
             ResetCards();
         }
 
